@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Medico-Legal Experts emblem">
+  <path d="M32 3 56 11v22.2C56 46.6 45.9 56.9 32 61 18.1 56.9 8 46.6 8 33.2V11L32 3Z" fill="#FFFFFF" stroke="#0B1B3D" stroke-width="2.1" />
+  <g stroke="#0B1B3D" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32 18v22" />
+    <path d="M21 22h22" />
+    <path d="M24.5 22 20.5 30h8L24.5 22Z" fill="rgba(11,27,61,.1)" />
+    <path d="M39.5 22 35.5 30h8l-4-8Z" fill="rgba(11,27,61,.1)" />
+    <path d="M18 22a6 6 0 0 0 4 4M46 22a6 6 0 0 1-4 4" />
+    <path d="M27.5 41.5h9" />
+  </g>
+  <circle cx="32" cy="15.6" r="2.2" fill="#D4AF37" />
+</svg>

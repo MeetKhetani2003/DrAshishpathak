@@ -1,0 +1,294 @@
+@import "tailwindcss";
+@import "@fontsource/cinzel/latin-400.css";
+@import "@fontsource/cinzel/latin-600.css";
+@import "@fontsource/cinzel/latin-700.css";
+@import "@fontsource/playfair-display/latin-400.css";
+@import "@fontsource/playfair-display/latin-400-italic.css";
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+
+@theme {
+  --color-navy: #0b1b3d;
+  --color-navy-deep: #07152f;
+  --color-navy-mid: #0f2447;
+  --color-navy-line: #1b3159;
+  --color-navy-veil: #16294b;
+  --color-gold: #d4af37;
+  --color-gold-soft: #e3c76a;
+  --color-gold-dim: rgba(212, 175, 55, 0.28);
+  --color-paper: #f7f8fa;
+  --color-ink: #20242b;
+  --color-ink-soft: #5a616e;
+
+  --font-display: "Cinzel", "Playfair Display", Georgia, serif;
+  --font-editorial: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+
+  --font-weight-400: 400;
+  --font-weight-500: 500;
+  --font-weight-600: 600;
+  --font-weight-700: 700;
+  --font-weight-800: 800;
+
+  --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.36, 0.64, 1);
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: rgba(212, 175, 55, 0.28);
+    color: #0b1b3d;
+  }
+
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #eef0f4;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #0b1b3d;
+    border: 3px solid #eef0f4;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d4af37;
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+@utility container-x {
+  padding-inline: 1.25rem;
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+}
+
+@layer components {
+  @media (min-width: 768px) {
+    .container-x {
+      padding-inline: 2.5rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container-x {
+      padding-inline: 4rem;
+    }
+  }
+}
+
+/* ---------- Reveal system ---------- */
+.rv {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+  transition:
+    opacity 700ms var(--ease-silk),
+    transform 700ms var(--ease-silk);
+  will-change: opacity, transform;
+}
+.rv.is-in {
+  opacity: 1;
+  transform: none;
+}
+.rv-left {
+  transform: translate3d(-26px, 0, 0);
+}
+.rv-right {
+  transform: translate3d(26px, 0, 0);
+}
+.rv-scale {
+  transform: scale(1.06);
+}
+
+/* line-mask reveal for display type */
+.mask-line > span {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.mask-line > span > span {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 900ms var(--ease-silk);
+}
+.mask-line.is-in > span > span {
+  transform: none;
+}
+
+/* image reveal shutter */
+.img-reveal {
+  position: relative;
+  overflow: hidden;
+}
+.img-reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0b1b3d;
+  transform: scaleX(1);
+  transform-origin: right;
+  transition: transform 900ms var(--ease-silk);
+  z-index: 2;
+}
+.img-reveal.is-in::after {
+  transform: scaleX(0);
+}
+
+/* animated gold rule */
+.rule-grow {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 900ms var(--ease-silk) 120ms;
+}
+.rule-grow.is-in {
+  transform: scaleX(1);
+}
+
+.hairline {
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 175, 55, 0.55) 18%,
+    rgba(212, 175, 55, 0.55) 82%,
+    transparent
+  );
+  height: 1px;
+}
+
+.grain {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+.grid-etch {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.duotone-navy {
+  filter: saturate(0.55) contrast(1.06) brightness(0.94);
+}
+
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 320ms var(--ease-silk);
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+@keyframes driftY {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+.animate-drift {
+  animation: driftY 9s ease-in-out infinite;
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.86);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+.animate-pulse-ring {
+  animation: pulseRing 2.8s var(--ease-silk) infinite;
+}
+
+@keyframes fadeUpFast {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-fade-up {
+  animation: fadeUpFast 560ms var(--ease-silk) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rv,
+  .mask-line > span > span,
+  .img-reveal::after,
+  .rule-grow {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .animate-drift,
+  .animate-pulse-ring,
+  .animate-fade-up {
+    animation: none !important;
+  }
+}
