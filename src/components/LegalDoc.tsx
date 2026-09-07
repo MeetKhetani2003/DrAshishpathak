@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+"use client";
+import Link from 'next/link';;
 import { Eyebrow, GoldRule, Reveal, Emblem, scrollToId } from "@/components/ui";
 import { brand, contact } from "@/data/site";
 
@@ -103,9 +104,9 @@ export default function LegalDoc({
                   `This notice forms part of the terms under which ${brand.firm} publishes information on this website.`}
               </p>
               <div className="mt-7 flex flex-wrap gap-6 text-[0.66rem] font-600 uppercase tracking-[0.18em]">
-                <Link to="/contact" className="text-navy link-underline">Contact The Desk</Link>
-                <Link to="/privacy-policy" className="text-navy link-underline">Privacy Policy</Link>
-                <Link to="/disclaimer" className="text-navy link-underline">Disclaimer</Link>
+                <Link href="/contact" className="text-navy link-underline">Contact The Desk</Link>
+                <Link href="/privacy-policy" className="text-navy link-underline">Privacy Policy</Link>
+                <Link href="/disclaimer" className="text-navy link-underline">Disclaimer</Link>
               </div>
             </div>
           </div>

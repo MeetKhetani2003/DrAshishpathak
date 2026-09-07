@@ -1,7 +1,10 @@
+"use client";
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';;
 import { Menu, X, Phone } from "lucide-react";
 import { brand, contact, nav } from "@/data/site";
+import { ChevronDown } from "lucide-react";
 import { Wordmark } from "@/components/ui";
 import { cn } from "@/utils/cn";
 
@@ -9,7 +12,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
   const [open, setOpen] = useState(false);
-  const { pathname } = useLocation();
+  const [joinOpen, setJoinOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => {
@@ -27,7 +31,10 @@ export default function Header() {
     };
   }, []);
 
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    setOpen(false);
+    setJoinOpen(false);
+  }, [pathname]);
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -69,18 +76,18 @@ export default function Header() {
           )}
         >
           <div className={cn("container-x flex items-center justify-between transition-all duration-500", solid ? "h-[4.4rem]" : "h-[5.1rem]")}>
-            <Link to="/" aria-label={`${brand.firm} — home`} className="shrink-0">
+            <Link href="/" aria-label={`${brand.firm} — home`} className="shrink-0">
               <Wordmark tone="light" compact={solid} />
             </Link>
 
               <nav aria-label="Primary" className="hidden items-center gap-7 xl:gap-8 lg:flex">
-              {nav.map((item) => (
-                <NavLink key={item.to} to={item.to} className={({ isActive }) => cn(
-                    "group relative py-2 text-[0.66rem] font-500 uppercase tracking-[0.2em] transition-colors duration-300",
-                    isActive ? "text-gold-soft" : "text-white/72 hover:text-white",
-                  )}>
-                  {({ isActive }) => (
-                    <>
+              {nav.map((item) => {
+                const isActive = pathname === item.to;
+                return (
+                  <Link key={item.to} href={item.to} className={cn(
+                      "group relative py-2 text-[0.66rem] font-500 uppercase tracking-[0.2em] transition-colors duration-300",
+                      isActive ? "text-gold-soft" : "text-white/72 hover:text-white",
+                    )}>
                       {item.label}
                       <span
                         className={cn(
@@ -88,22 +95,53 @@ export default function Header() {
                           isActive ? "w-full" : "w-0 group-hover:w-full",
                         )}
                       />
-                    </>
-                  )}
-                </NavLink>
-              ))}
+                  </Link>
+                );
+              })}
             </nav>
 
             <div className="flex items-center gap-3">
-              <Link
-                to="/contact"
-                className="group relative hidden overflow-hidden border border-gold/50 px-6 py-3 text-[0.63rem] font-600 uppercase tracking-[0.2em] text-gold-soft transition-colors duration-400 hover:text-navy md:inline-flex"
+              {/* Join Us Dropdown */}
+              <div 
+                className="relative hidden md:block"
+                onMouseEnter={() => setJoinOpen(true)}
+                onMouseLeave={() => setJoinOpen(false)}
+              >
+                <button
+                  type="button"
+                  className="group relative flex items-center gap-1.5 overflow-hidden border border-gold/50 px-6 py-3 text-[0.63rem] font-600 uppercase tracking-[0.2em] text-gold-soft transition-colors duration-400 hover:text-navy"
+                >
+                  <span className="relative z-10">Join Us</span>
+                  <ChevronDown className="relative z-10 h-3 w-3" />
+                  <span className="absolute inset-0 z-0 translate-y-full bg-gold transition-transform duration-400 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-y-0" />
+                </button>
+                
+                {/* Dropdown Menu */}
+                <div 
+                  className={cn(
+                    "absolute right-0 top-full mt-2 w-48 border border-white/10 bg-navy-deep/95 shadow-xl backdrop-blur-md transition-all duration-300",
+                    joinOpen ? "translate-y-0 opacity-100 visible" : "translate-y-2 opacity-0 invisible"
+                  )}
+                >
+                  <Link href="/contact?join=legal" 
+                    className="block border-b border-white/5 px-4 py-3.5 text-[0.68rem] uppercase tracking-[0.15em] text-white/70 hover:bg-white/5 hover:text-gold-soft"
+                  >
+                    As a Legal Expert
+                  </Link>
+                  <Link href="/contact?join=medical" 
+                    className="block px-4 py-3.5 text-[0.68rem] uppercase tracking-[0.15em] text-white/70 hover:bg-white/5 hover:text-gold-soft"
+                  >
+                    As a Medical Expert
+                  </Link>
+                </div>
+              </div>
+
+              <Link href="/contact"
+                className="group relative hidden overflow-hidden bg-gold px-6 py-3 text-[0.63rem] font-600 uppercase tracking-[0.2em] text-navy transition-colors duration-400 hover:bg-gold-soft md:inline-flex"
               >
                 <span className="relative z-10">Request Advisory</span>
-                <span className="absolute inset-0 z-0 translate-y-full bg-gold transition-transform duration-400 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-y-0" />
               </Link>
-              <Link
-                to="/contact"
+              <Link href="/contact"
                 className="bg-gold px-4 py-2.5 text-[0.58rem] font-600 uppercase tracking-[0.16em] text-navy transition-colors duration-300 hover:bg-gold-soft md:hidden"
               >
                 Advisory
@@ -160,8 +198,7 @@ export default function Header() {
           <ul className="container-x flex flex-col divide-y divide-white/8 py-2">
             {nav.map((item, i) => (
               <li key={item.to}>
-                <Link
-                  to={item.to}
+                <Link href={item.to}
                   tabIndex={open ? 0 : -1}
                   className="flex items-baseline gap-4 py-4 font-display text-[1.05rem] uppercase tracking-[0.06em] text-white/86 transition-colors hover:text-gold"
                 >
@@ -172,13 +209,26 @@ export default function Header() {
             ))}
           </ul>
           <div className="container-x flex flex-col gap-3 pb-9 pt-5">
-            <Link
-              to="/contact"
+            <Link href="/contact"
               tabIndex={open ? 0 : -1}
               className="flex items-center justify-center gap-2 bg-gold px-6 py-4 text-[0.66rem] font-600 uppercase tracking-[0.2em] text-navy"
             >
               Request Advisory
             </Link>
+            <div className="grid grid-cols-2 gap-3">
+              <Link href="/contact?join=legal"
+                tabIndex={open ? 0 : -1}
+                className="flex items-center justify-center border border-white/20 px-4 py-3.5 text-center text-[0.6rem] font-600 uppercase tracking-[0.15em] text-gold-soft"
+              >
+                Join as Legal
+              </Link>
+              <Link href="/contact?join=medical"
+                tabIndex={open ? 0 : -1}
+                className="flex items-center justify-center border border-white/20 px-4 py-3.5 text-center text-[0.6rem] font-600 uppercase tracking-[0.15em] text-gold-soft"
+              >
+                Join as Medical
+              </Link>
+            </div>
             <a
               href={`tel:${contact.phones[0].replace(/\s/g, "")}`}
               className="flex items-center justify-center gap-2 border border-white/20 px-6 py-4 text-[0.66rem] font-500 uppercase tracking-[0.2em] text-white/80"

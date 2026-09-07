@@ -14,7 +14,12 @@ export const brand = {
 
 export const contact = {
   phones: ["+91 90270 62686", "+91 82738 20488"],
-  email: "dr.pathakassociates@gmail.com",
+  email: "support@medicolegalexperts.in",
+  socials: {
+    facebook: "https://www.facebook.com/medicolegalxperts",
+    instagram: "https://www.instagram.com/medicolegalxperts/",
+    youtube: "https://www.youtube.com/@medicolegalxperts",
+  },
   hours: "Mon – Sat · 10:00 – 19:00 IST",
   offices: [
     {
@@ -266,7 +271,7 @@ export const founder = {
   experienceScope: ["Clinical", "Orthopedic", "Forensic", "Legal"],
   credentials: [
     "MD (A.MED.)",
-    "CFMT",
+    "CFMT - Forensic medicine and Toxicology",
     "BPT (UK)",
     "MPT (Ortho)",
     "MIAP",
@@ -276,6 +281,12 @@ export const founder = {
     "CCFT — Forensic Toxicology",
   ],
   expertise: ["Trauma Biomechanics", "Toxicology Audit", "Medical Negligence Defense"],
+  memberships: [
+    "INDIAN MEDICO-LEGAL AND ETHICS ASSOCIATION",
+    "INDIAN SOCIETY OF FORENSIC SCIENCES",
+    "IAP",
+    "DISTRICT CHAIRMAN (NATIONAL PUBLIC GRIEVIANCE AND INVESTIGATION COMMISSION)"
+  ],
   summary:
-    "Dr. Ashish Pathak trained and practised through orthopaedic and clinical medicine before moving into forensic and medico-legal advisory work. That combination — a clinician's reading of an injury and a lawyer's reading of a record — defines how the firm handles every file that reaches it.",
+    "Dr. Ashish Pathak trained and practised through orthopedic injuries, joints biomechanics and rehabilitation before moving into forensic and medico-legal advisory work. That combination — a clinician's reading of an injury and a lawyer's reading of a record — defines how the firm handles every file that reaches it.",
 } as const;

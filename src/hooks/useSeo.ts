@@ -1,3 +1,4 @@
+"use client";
 import { useEffect } from "react";
 
 type Seo = { title: string; description: string };

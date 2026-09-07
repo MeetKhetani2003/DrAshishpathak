@@ -1,3 +1,4 @@
+"use client";
 import type { ReactNode } from "react";
 import { Eyebrow, MaskLines, Reveal } from "@/components/ui";
 import { cn } from "@/utils/cn";

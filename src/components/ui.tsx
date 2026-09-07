@@ -1,5 +1,6 @@
+"use client";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Link } from "react-router-dom";
+import Link from 'next/link';;
 import {
   ArrowRight,
   ArrowUpRight,
@@ -294,7 +295,7 @@ export function PrimaryAction({
     </>
   );
   const cls = cn(btnBase, palette[tone], className);
-  if (to) return <Link to={to} className={cls} onClick={onClick}>{inner}</Link>;
+  if (to) return <Link href={to} className={cls} onClick={onClick}>{inner}</Link>;
   if (href) return <a href={href} className={cls}>{inner}</a>;
   return (
     <button type={type ?? "button"} className={cls} onClick={onClick}>
@@ -332,7 +333,7 @@ export function OutlineAction({
       <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
     </>
   );
-  if (to) return <Link to={to} className={cls} onClick={onClick}>{inner}</Link>;
+  if (to) return <Link href={to} className={cls} onClick={onClick}>{inner}</Link>;
   return (
     <a href={href ?? undefined} className={cls} onClick={onClick}>
       {inner}
@@ -353,8 +354,7 @@ export function scrollToId(id: string) {
 
 export function ArrowLink({ to, children, tone = "light" }: { to: string; children: ReactNode; tone?: "light" | "dark" }) {
   return (
-    <Link
-      to={to}
+    <Link href={to}
       className={cn(
         "group inline-flex items-center gap-3 text-[0.7rem] font-600 uppercase tracking-[0.2em]",
         tone === "light" ? "text-gold-soft" : "text-navy",
