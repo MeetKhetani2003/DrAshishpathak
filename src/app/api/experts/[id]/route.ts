@@ -64,7 +64,7 @@ export async function DELETE(
 ) {
   try {
     await dbConnect();
-    const expert = const params = await props.params;
+    const params = await props.params;
     const expert = await Expert.findByIdAndDelete(params.id);
     
     if (!expert) {
