@@ -1,4 +1,5 @@
 "use client";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 import Link from 'next/link';;
 import { ArrowLeft, CalendarDays, Clock3, Tag } from "lucide-react";
@@ -9,7 +10,8 @@ import { cn } from "@/utils/cn";
 import useSeo from "@/hooks/useSeo";
 
 export default function Insights() {
-  const { slug } = useParams();
+  const params = useParams();
+  const slug = params?.slug as string | undefined;
   return slug ? <Article slug={slug} /> : <Hub />;
 }
 
@@ -107,7 +109,7 @@ function Hub() {
               against a defined scope.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-7">
-              <PrimaryAction to="/contact">Request Advisory</PrimaryAction>
+              <PrimaryAction href="/contact">Request Advisory</PrimaryAction>
               <ArrowLink to="/methodology" tone="light">Our Method</ArrowLink>
             </div>
           </div>
@@ -231,7 +233,7 @@ function Article({ slug }: { slug: string }) {
           </div>
           <div className="mt-10 grid gap-px bg-navy/12 md:grid-cols-3">
             {related.map((r) => (
-              <Link key={r.slug} to={`/insights/${r.slug}`} className="group flex h-full flex-col bg-paper p-7 transition-colors duration-500 hover:bg-white">
+              <Link key={r.slug} href={`/insights/${r.slug}`} className="group flex h-full flex-col bg-paper p-7 transition-colors duration-500 hover:bg-white">
                 <span className="eyebrow text-gold">{r.category}</span>
                 <h3 className="mt-4 font-display text-[1.05rem] uppercase leading-snug text-navy">{r.title}</h3>
                 <p className="mt-3 flex-1 text-[0.85rem] leading-relaxed text-ink/60">{r.excerpt}</p>

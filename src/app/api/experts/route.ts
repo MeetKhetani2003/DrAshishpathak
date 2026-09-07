@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       
       const buffer = Buffer.from(await imageFile.arrayBuffer());
       const uploadStream = bucket.openUploadStream(imageFile.name, {
-        contentType: imageFile.type
+        metadata: { contentType: imageFile.type }
       });
       
       uploadStream.end(buffer);

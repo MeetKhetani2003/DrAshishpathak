@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import dbConnect from '@/lib/mongodb';
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   props: { params: Promise<{ id: string }> }
 ) {
   try {

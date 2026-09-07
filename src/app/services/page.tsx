@@ -1,4 +1,5 @@
 "use client";
+import { useParams } from "next/navigation";
 import Link from 'next/link';;
 import { AlertTriangle, ClipboardCheck, Compass, Users, ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
@@ -19,7 +20,8 @@ import { cn } from "@/utils/cn";
 import useSeo from "@/hooks/useSeo";
 
 export default function Services() {
-  const { slug } = useParams();
+  const params = useParams();
+  const slug = params?.slug as string | undefined;
   return slug ? <ServiceDetail slug={slug} /> : <ServicesIndex />;
 }
 
@@ -55,7 +57,7 @@ function ServicesIndex() {
             {serviceCategories.map((c) => (
               <Link
                 key={c.slug}
-                to={`/services/${c.slug}`}
+                href={`/services/${c.slug}`}
                 className="group inline-flex items-center gap-3 border border-white/16 px-5 py-3 text-[0.68rem] font-500 uppercase tracking-[0.16em] text-white/75 transition-all duration-300 hover:border-gold hover:bg-gold/10 hover:text-white"
               >
                 {c.nav}
@@ -93,7 +95,7 @@ function ServicesIndex() {
                     ))}
                   </ul>
                   <div className="mt-9">
-                    <PrimaryAction to={`/services/${c.slug}`} tone="navy">View Category Detail</PrimaryAction>
+                    <PrimaryAction href={`/services/${c.slug}`} tone="navy">View Category Detail</PrimaryAction>
                   </div>
                 </div>
               </article>
@@ -151,7 +153,7 @@ function ServiceDetail({ slug }: { slug: string }) {
           {serviceCategories.map((s) => (
             <Link
               key={s.slug}
-              to={`/services/${s.slug}`}
+              href={`/services/${s.slug}`}
               className={cn(
                 "shrink-0 px-4 py-2.5 text-[0.63rem] font-600 uppercase tracking-[0.16em] transition-colors duration-300",
                 s.slug === c.slug ? "bg-navy text-white" : "text-ink/55 hover:text-navy",
@@ -280,7 +282,7 @@ function ServiceDetail({ slug }: { slug: string }) {
                 ))}
               </ul>
               <div className="mt-9 border-t border-white/12 pt-7">
-                <PrimaryAction to="/contact">Discuss This Matter</PrimaryAction>
+                <PrimaryAction href="/contact">Discuss This Matter</PrimaryAction>
               </div>
             </div>
           </div>

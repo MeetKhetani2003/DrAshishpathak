@@ -1,12 +1,12 @@
 "use client";
-import { useState, type FormEvent } from "react";
+import { Suspense, useState, type FormEvent } from "react";
 import { CheckCircle2, ChevronDown, Clock3, Mail, MapPin, Phone, ShieldCheck, AlertCircle } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import { Emblem, Eyebrow, GoldRule, MaskLines, Reveal, SectionHeading } from "@/components/ui";
 import { contact } from "@/data/site";
 import { cn } from "@/utils/cn";
 import useSeo from "@/hooks/useSeo";
-import { useSearchParams } from 'next/navigation';;
+import { useSearchParams } from 'next/navigation';
 
 const categories = [
   "Advocate / Law Firm",
@@ -22,7 +22,15 @@ const categories = [
 type Fields = { name: string; phone: string; email: string; category: string; summary: string };
 type Errors = Partial<Record<keyof Fields, string>>;
 
-export default function Contact() {
+export default function ContactPage() {
+  return (
+    <Suspense fallback={null}>
+      <Contact />
+    </Suspense>
+  );
+}
+
+function Contact() {
   const searchParams = useSearchParams();
   const joinParam = searchParams ? searchParams.get("join") : null;
   

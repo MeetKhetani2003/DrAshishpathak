@@ -32,7 +32,7 @@ export async function PUT(
       
       const buffer = Buffer.from(await imageFile.arrayBuffer());
       const uploadStream = bucket.openUploadStream(imageFile.name, {
-        contentType: imageFile.type
+        metadata: { contentType: imageFile.type }
       });
       
       uploadStream.end(buffer);
@@ -59,7 +59,7 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: NextRequest,
+  _request: NextRequest,
   props: { params: Promise<{ id: string }> }
 ) {
   try {
