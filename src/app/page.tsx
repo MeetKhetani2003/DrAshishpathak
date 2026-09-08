@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from 'next/link';
 import { ArrowRight, Phone, MapPin, Mail, Quote } from "lucide-react";
 import {
@@ -599,27 +599,94 @@ function ExpertBoardStrip() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-14 grid gap-8 lg:grid-cols-1 xl:grid-cols-2">
           {board.map((e, i) => (
-            <Reveal key={e.id} delay={i * 100}>
-              <Link href="/expert-board" className="group flex h-full flex-col border border-navy/12 bg-white p-7 transition-all duration-500 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_28px_60px_-38px_rgba(11,27,61,.45)]">
-                <div className="flex items-start justify-between">
-                  <span className="flex h-14 w-14 items-center justify-center border border-navy/12 bg-paper transition-colors duration-500 group-hover:border-gold/60 group-hover:bg-navy">
-                    <Monogram initials={e.initials} className="text-[1.05rem] tracking-[0.06em] text-navy group-hover:text-gold-soft" />
-                  </span>
-                  <span className="font-display text-[0.66rem] uppercase tracking-[0.2em] text-gold">{String(i + 2).padStart(2, "0")}</span>
+            <Reveal key={e._id || e.id || i} delay={i * 90}>
+              <Link
+                href="/expert-board"
+                className="group block overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-[0_4px_32px_-12px_rgba(11,27,61,.14)] transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_24px_56px_-20px_rgba(11,27,61,.28)]"
+              >
+                <div className="flex flex-col sm:flex-row">
+                  {/* Photo */}
+                  <div className="relative flex-shrink-0 sm:w-[38%]">
+                    <div className="relative m-4 overflow-hidden rounded-xl border-2 border-[#c9a84c] aspect-[4/5] sm:aspect-auto sm:h-full">
+                      {e.image ? (
+                        <img
+                          src={e.image}
+                          alt={`Portrait of ${e.name}`}
+                          className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      ) : (
+                        <div className="flex h-full min-h-[220px] items-center justify-center bg-paper">
+                          <span className="font-display text-[3rem] font-700 text-navy/20">{e.initials}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Data table */}
+                  <div className="flex flex-1 flex-col">
+                    <table className="w-full border-collapse text-left text-[0.82rem]">
+                      <tbody>
+                        <ExpertRow label="Name">
+                          <span className="font-display text-[1rem] font-700 text-navy leading-snug">{e.name}</span>
+                        </ExpertRow>
+                        <ExpertRow label="Designation">
+                          <span className="text-ink/80">{e.role}</span>
+                        </ExpertRow>
+                        {e.jurisdiction && (
+                          <ExpertRow label="Court Practice">
+                            <span className="text-ink/80">{e.jurisdiction}</span>
+                          </ExpertRow>
+                        )}
+                        {e.qualifications?.length > 0 && (
+                          <ExpertRow label="Qualifications">
+                            <span className="text-ink/80">{e.qualifications.join(", ")}</span>
+                          </ExpertRow>
+                        )}
+                        {e.experience && (
+                          <ExpertRow label="Experience">
+                            <span className="text-ink/80">{e.experience}</span>
+                          </ExpertRow>
+                        )}
+                        {e.practiceAreas?.length > 0 && (
+                          <ExpertRow label="Key Focus">
+                            <ul className="space-y-0.5 text-ink/80">
+                              {e.practiceAreas.map((area: string) => (
+                                <li key={area} className="flex items-start gap-1.5">
+                                  <span className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-navy/50" aria-hidden="true" />
+                                  {area}
+                                </li>
+                              ))}
+                            </ul>
+                          </ExpertRow>
+                        )}
+                        <ExpertRow label="Professional Engagement" isLast>
+                          <span className="text-ink/80">Allied Expert Panel, Dr. Ashish Pathak &amp; Associates</span>
+                        </ExpertRow>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <h3 className="mt-6 font-display text-[1.08rem] uppercase leading-snug tracking-[0.03em] text-navy">{e.name}</h3>
-                <p className="mt-2.5 text-[0.78rem] uppercase tracking-[0.1em] text-ink/50">{e.role}</p>
-                <span className="mt-5 block h-px w-full bg-navy/10" aria-hidden="true" />
-                <span className="mt-5 block font-display text-[1.5rem] font-600 text-navy/85">{e.experience}</span>
-                <span className="mt-1 block text-[0.68rem] uppercase tracking-[0.2em] text-ink/40">At the Bar</span>
               </Link>
             </Reveal>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function ExpertRow({ label, children, isLast }: { label: string; children: React.ReactNode; isLast?: boolean }) {
+  return (
+    <tr className={`border-b ${isLast ? "border-navy/0" : "border-navy/10"} align-top`}>
+      <td className="w-[36%] bg-[#0b1b3d] px-4 py-3 font-semibold text-white leading-snug align-top text-[0.78rem]">
+        {label}
+      </td>
+      <td className="px-4 py-3 leading-snug">{children}</td>
+    </tr>
   );
 }
 
