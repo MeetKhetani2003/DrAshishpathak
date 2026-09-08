@@ -22,7 +22,6 @@ import {
   Icon,
   ImgReveal,
   MaskLines,
-  Monogram,
   OutlineAction,
   PrimaryAction,
   Reveal,
