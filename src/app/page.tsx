@@ -175,7 +175,7 @@ function Hero() {
               <p className="font-display text-[3.6rem] font-700 leading-none text-white lg:text-[4.6rem]">
                 18<span className="text-gold">+</span>
               </p>
-              <p className="mt-2 eyebrow text-gold-soft">Years</p>
+              <p className="mt-2 eyebrow text-gold-soft">Years Of Experience</p>
               <ul className="mt-8 space-y-0">
                 {founder.experienceScope.map((s, i) => (
                   <li key={s} className="group flex items-center gap-4 border-t border-white/10 py-4 last:border-b">
@@ -603,9 +603,9 @@ function ExpertBoardStrip() {
             <Reveal key={e._id || e.id || i} delay={i * 90}>
               <Link
                 href="/expert-board"
-                className="group block overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-[0_4px_32px_-12px_rgba(11,27,61,.14)] transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_24px_56px_-20px_rgba(11,27,61,.28)]"
+                className="group block h-full overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-[0_4px_32px_-12px_rgba(11,27,61,.14)] transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_24px_56px_-20px_rgba(11,27,61,.28)]"
               >
-                <div className="flex flex-col sm:flex-row">
+                <div className="flex flex-col sm:flex-row h-full">
                   {/* Photo */}
                   <div className="relative flex-shrink-0 sm:w-[38%]">
                     <div className="relative m-4 overflow-hidden rounded-xl border-2 border-[#c9a84c] aspect-[4/5] sm:aspect-auto sm:h-full">

@@ -43,6 +43,22 @@ export default function RootLayout({
         <Footer />
         <div className="h-[3.4rem] md:hidden" aria-hidden="true" />
         <MobileCtaBar />
+        
+        {/* Google Translate Integration */}
+        <div id="google_translate_element" style={{ display: 'none' }}></div>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              function googleTranslateElementInit() {
+                new google.translate.TranslateElement(
+                  { pageLanguage: 'en', includedLanguages: 'en,hi', autoDisplay: false },
+                  'google_translate_element'
+                );
+              }
+            `,
+          }}
+        />
+        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
       </body>
     </html>
   )

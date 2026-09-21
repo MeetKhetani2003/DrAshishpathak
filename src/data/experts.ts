@@ -92,7 +92,7 @@ export const experts: Expert[] = [
     id: "adv-dr-arun-mishra",
     name: "Adv. Dr. Arun Mishra",
     role: "Senior Medico-Legal Consultant & Judicial Evidence Strategist",
-    experience: "Clinical & Forensic",
+    experience: "25+ Years",
     initials: "AM",
     qualifications: [
       "LL.M. (Criminal Law)",
