@@ -50,7 +50,7 @@ export default function ExpertBoard() {
         meta={[
           { label: "Panel Strength", value: "Multiple Different Speciality Experts" },
           { label: "Combined Practice", value: "Clinical · Forensic · Legal" },
-          { label: "Jurisdiction", value: "Uttar Pradesh & Pan-India Advisory" },
+          { label: "Jurisdiction", value: "Pan-India Advisory" },
           { label: "Engagement", value: "Confidential, Scope-defined" },
         ]}
       />
