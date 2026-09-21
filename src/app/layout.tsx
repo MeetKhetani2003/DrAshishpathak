@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { Cinzel, Inter, Playfair_Display } from 'next/font/google'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import MobileCtaBar from '@/components/MobileCtaBar'
+import SiteLayoutWrapper from '@/components/SiteLayoutWrapper'
 import '../index.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
@@ -28,21 +26,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${cinzel.variable} ${playfair.variable}`}>
-      <body className="flex min-h-screen flex-col bg-white">
+    <html lang="en" className={`${inter.variable} ${cinzel.variable} ${playfair.variable}`} suppressHydrationWarning>
+      <body className="flex min-h-screen flex-col bg-white" suppressHydrationWarning>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-gold focus:px-4 focus:py-2 focus:text-[0.7rem] focus:font-600 focus:uppercase focus:tracking-[0.2em] focus:text-navy"
         >
           Skip to content
         </a>
-        <Header />
-        <main id="main" className="flex-1 animate-fade-up">
+        <SiteLayoutWrapper>
           {children}
-        </main>
-        <Footer />
-        <div className="h-[3.4rem] md:hidden" aria-hidden="true" />
-        <MobileCtaBar />
+        </SiteLayoutWrapper>
         
         {/* Google Translate Integration */}
         <div id="google_translate_element" style={{ display: 'none' }}></div>

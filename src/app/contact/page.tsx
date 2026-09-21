@@ -41,6 +41,7 @@ function Contact() {
   const [values, setValues] = useState<Fields>({ name: "", phone: "", email: "", category: initialCategory, summary: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useSeo({
     title: "Request Advisory | Dr. Ashish Pathak & Associates Medico-Legal Experts",
@@ -63,11 +64,35 @@ function Contact() {
     return e;
   };
 
-  const onSubmit = (ev: FormEvent) => {
+  const onSubmit = async (ev: FormEvent) => {
     ev.preventDefault();
     const e = validate();
     setErrors(e);
-    if (Object.keys(e).length === 0) setSent(true);
+    if (Object.keys(e).length === 0) {
+      setIsSubmitting(true);
+      try {
+        const res = await fetch('/api/inquiries', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: values.name,
+            email: values.email,
+            phone: values.phone,
+            subject: values.category,
+            message: values.summary,
+          })
+        });
+        if (res.ok) {
+          setSent(true);
+        } else {
+          setErrors({ summary: 'Failed to submit the form. Please try again later.' });
+        }
+      } catch (err) {
+        setErrors({ summary: 'Network error. Please try again later.' });
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
   };
 
   return (
@@ -300,9 +325,10 @@ function Contact() {
 
                   <button
                     type="submit"
-                    className="group relative mt-9 flex w-full items-center justify-center gap-3 overflow-hidden bg-navy px-8 py-5 text-[0.7rem] font-600 uppercase tracking-[0.2em] text-white transition-colors duration-400 hover:bg-gold hover:text-navy"
+                    disabled={isSubmitting}
+                    className="group relative mt-9 flex w-full items-center justify-center gap-3 overflow-hidden bg-navy px-8 py-5 text-[0.7rem] font-600 uppercase tracking-[0.2em] text-white transition-colors duration-400 hover:bg-gold hover:text-navy disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    <span className="relative z-10">Submit Case Review Request</span>
+                    <span className="relative z-10">{isSubmitting ? "Submitting..." : "Submit Case Review Request"}</span>
                   </button>
                 </form>
               )}
