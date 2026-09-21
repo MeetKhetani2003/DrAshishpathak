@@ -627,7 +627,7 @@ function ExpertBoardStrip() {
 
                   {/* Data table */}
                   <div className="flex flex-1 flex-col">
-                    <table className="w-full border-collapse text-left text-[0.82rem]">
+                    <table className="h-full w-full border-collapse text-left text-[0.82rem]">
                       <tbody>
                         <ExpertRow label="Name">
                           <span className="font-display text-[1rem] font-700 text-navy leading-snug">{e.name}</span>
@@ -680,7 +680,7 @@ function ExpertBoardStrip() {
 
 function ExpertRow({ label, children, isLast }: { label: string; children: React.ReactNode; isLast?: boolean }) {
   return (
-    <tr className={`border-b ${isLast ? "border-navy/0" : "border-navy/10"} align-top`}>
+    <tr className={`border-b ${isLast ? "border-navy/0 h-full" : "border-navy/10"} align-top`}>
       <td className="w-[36%] bg-[#0b1b3d] px-4 py-3 font-semibold text-white leading-snug align-top text-[0.78rem]">
         {label}
       </td>

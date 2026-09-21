@@ -148,6 +148,8 @@
 .mask-line > span {
   display: block;
   overflow: hidden;
+  padding-top: 0.25em;
+  margin-top: -0.25em;
   padding-bottom: 0.12em;
   margin-bottom: -0.12em;
 }
