@@ -2,12 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Service from '@/models/Service';
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     await dbConnect();
     const data = await request.json();
     
-    const service = await Service.findByIdAndUpdate(params.id, data, { new: true });
+    const service = await Service.findByIdAndUpdate(id, data, { new: true });
     
     if (!service) {
       return new NextResponse('Service not found', { status: 404 });
@@ -20,11 +21,12 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     await dbConnect();
     
-    const service = await Service.findByIdAndDelete(params.id);
+    const service = await Service.findByIdAndDelete(id);
     
     if (!service) {
       return new NextResponse('Service not found', { status: 404 });
