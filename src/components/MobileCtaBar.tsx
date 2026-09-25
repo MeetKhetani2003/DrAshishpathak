@@ -20,7 +20,7 @@ export default function MobileCtaBar() {
       }`}
     >
       <div className="flex items-stretch divide-x divide-white/10">
-        <a href={`tel:${contact.phones[0].replace(/\s/g, "")}`} className="flex flex-1 items-center justify-center gap-2 py-4 text-[0.62rem] font-500 uppercase tracking-[0.2em] text-white/78">
+        <a href={`tel:${contact.phones[0].replace(/\s/g, "")}`} className="flex flex-1 items-center justify-center gap-2 py-4 text-[0.62rem] font-500 uppercase tracking-[0.2em] text-white/78" translate="no">
           <Phone className="h-3.5 w-3.5 text-gold" strokeWidth={1.7} /> Call
         </a>
         <Link href="/contact"

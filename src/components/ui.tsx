@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from 'next/link';;
+import { useLang } from "@/contexts/lang";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -219,6 +220,7 @@ export function Eyebrow({ children, className, tone = "gold" }: { children: Reac
 
 export function SectionHeading({
   lines,
+  hiLines,
   eyebrow,
   tone = "dark",
   align = "left",
@@ -226,17 +228,23 @@ export function SectionHeading({
   className,
 }: {
   lines: (string | ReactNode)[];
+  hiLines?: (string | ReactNode)[];
   eyebrow?: ReactNode;
   tone?: "dark" | "light";
   align?: "left" | "center";
   size?: "lg" | "md" | "sm";
   className?: string;
 }) {
+  const { lang } = useLang();
   const sizes = {
     lg: "text-[1.72rem] leading-[1.14] sm:text-[2.6rem] sm:leading-[1.06] lg:text-[3.5rem] xl:text-[4rem]",
     md: "text-[1.55rem] leading-[1.18] sm:text-[2.2rem] lg:text-[2.75rem]",
     sm: "text-[1.32rem] leading-[1.22] sm:text-[1.8rem]",
   } as const;
+
+  // Pick the correct lines based on active language
+  const activeLines = (lang === 'hi' && hiLines) ? hiLines : lines;
+
   return (
     <div className={cn(align === "center" && "text-center", className)}>
       {eyebrow ? <Eyebrow tone={tone === "light" ? "gold" : "navy"}>{eyebrow}</Eyebrow> : null}
@@ -246,8 +254,9 @@ export function SectionHeading({
           sizes[size],
           tone === "light" ? "text-white" : "text-navy",
         )}
+        translate={lang === 'hi' && hiLines ? 'no' : undefined}
       >
-        <MaskLines lines={lines} />
+        <MaskLines lines={activeLines} />
       </h2>
     </div>
   );

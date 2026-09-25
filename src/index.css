@@ -24,6 +24,7 @@
   --font-display: "Cinzel", "Playfair Display", Georgia, serif;
   --font-editorial: "Playfair Display", Georgia, serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-devanagari: "Noto Sans Devanagari", "Mangal", sans-serif;
 
   --font-weight-400: 400;
   --font-weight-500: 500;
@@ -54,6 +55,20 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
+
+  /* When Google Translate switches to Hindi, use Noto Sans Devanagari for clean rendering */
+  :lang(hi) body,
+  :lang(hi) p,
+  :lang(hi) span,
+  :lang(hi) li,
+  :lang(hi) a,
+  :lang(hi) label,
+  :lang(hi) button,
+  :lang(hi) div {
+    font-family: var(--font-devanagari), var(--font-body);
+    line-height: 1.75;
+  }
+
 
   h1,
   h2,

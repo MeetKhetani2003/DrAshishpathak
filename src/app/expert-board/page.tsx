@@ -214,6 +214,7 @@ function Field({ label, items, icon: IconCmp, dark }: { label: string; items: st
         {items.map((q) => (
           <li
             key={q}
+            translate="no"
             className={cn(
               "border px-2.5 py-1.5 text-[0.68rem] uppercase tracking-[0.09em] transition-colors duration-300",
               dark ? "border-white/14 text-white/72 hover:border-gold/60 hover:text-gold-soft" : "border-navy/14 text-navy/72 hover:border-gold",

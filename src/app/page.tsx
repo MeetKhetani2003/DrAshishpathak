@@ -242,6 +242,7 @@ function Introduction() {
               eyebrow="The Scientific Bridge"
               size="md"
               lines={["When medical facts", <span key="m" className="text-ink/45">meet legal questions,</span>, "precision matters."]}
+              hiLines={["जब चिकित्सा तथ्य", <span key="m" className="text-ink/45">कानूनी सवालों से मिलते हैं,</span>, "तब सटीकता मायने रखती है।"]}
             />
             <Reveal delay={200}>
               <GoldRule className="mt-10 max-w-md" />
@@ -337,6 +338,7 @@ function Founder() {
               {founder.credentials.map((c) => (
                 <li
                   key={c}
+                  translate="no"
                   className="border border-white/14 px-3 py-2 text-[0.66rem] font-500 uppercase tracking-[0.12em] text-white/72 transition-colors duration-300 hover:border-gold/60 hover:text-gold-soft"
                 >
                   {c}
@@ -347,7 +349,7 @@ function Founder() {
             <p className="mt-10 eyebrow text-white/40">Core Expertise</p>
             <ul className="mt-4 space-y-0">
               {founder.expertise.map((e, i) => (
-                <li key={e} className="flex items-center gap-4 border-t border-white/10 py-3.5 last:border-b">
+                <li key={e} translate="no" className="flex items-center gap-4 border-t border-white/10 py-3.5 last:border-b">
                   <span className="font-display text-[0.66rem] tracking-[0.2em] text-gold/70">{String(i + 1).padStart(2, "0")}</span>
                   <span className="font-display text-[0.95rem] uppercase tracking-[0.08em]">{e}</span>
                 </li>
@@ -391,7 +393,12 @@ function PracticeAreas() {
       />
       <div className="container-x relative">
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-          <SectionHeading tone="light" eyebrow="Practice Areas" lines={["Specialized advisory", <span key="f" className="text-white/45">for complex cases.</span>]} />
+          <SectionHeading
+            tone="light"
+            eyebrow="Practice Areas"
+            lines={["Specialized advisory", <span key="f" className="text-white/45">for complex cases.</span>]}
+            hiLines={["विशेषज्ञ सलाह", <span key="f" className="text-white/45">जटिल मामलों के लिए।</span>]}
+          />
           <Reveal delay={200} className="max-w-sm">
             <p className="text-[0.92rem] leading-[1.85] text-white/55">
               Four advisory lanes, one method: the clinical record interrogated with forensic discipline and framed for the
@@ -446,7 +453,12 @@ function WhoWeServe() {
     <section className="bg-white py-24 lg:py-28">
       <div className="container-x">
         <div className="flex flex-wrap items-end justify-between gap-8">
-          <SectionHeading eyebrow="Who We Serve" size="sm" lines={["Advisory built for", "the people who decide."]} />
+          <SectionHeading
+            eyebrow="Who We Serve"
+            size="sm"
+            lines={["Advisory built for", "the people who decide."]}
+            hiLines={["निर्णायकों के लिए", "तैयार की गई सलाह।"]}
+          />
           <Reveal delay={160}>
             <p className="max-w-sm text-[0.9rem] leading-[1.8] text-ink/60">
               One standard of analysis, adapted to how each audience is required to use it.

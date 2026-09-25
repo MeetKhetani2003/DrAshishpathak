@@ -7,6 +7,7 @@ import { brand, contact, nav } from "@/data/site";
 import { ChevronDown } from "lucide-react";
 import { Wordmark } from "@/components/ui";
 import { cn } from "@/utils/cn";
+import { useLang } from "@/contexts/lang";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,6 +15,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [joinOpen, setJoinOpen] = useState(false);
   const pathname = usePathname();
+  const { lang, setLang } = useLang();
 
   useEffect(() => {
     const onScroll = () => {
@@ -60,27 +62,25 @@ export default function Header() {
               Medico-Legal &amp; Forensic Advisory
             </span>
             <div className="flex items-center gap-7">
-              <span>Greater Noida&nbsp;•&nbsp;Agra</span>
-              <a href={`tel:${contact.phones[0].replace(/\s/g, "")}`} className="text-gold-soft transition-colors hover:text-gold">
+              <span translate="no">Greater Noida&nbsp;•&nbsp;Agra</span>
+              <a href={`tel:${contact.phones[0].replace(/\s/g, "")}`} className="text-gold-soft transition-colors hover:text-gold" translate="no">
                 {contact.phones[0]}
               </a>
               <div className="flex items-center gap-2 border-l border-white/20 pl-7">
-                <button 
-                  onClick={() => {
-                    document.cookie = "googtrans=/en/en; path=/";
-                    window.location.reload();
-                  }}
-                  className="text-gold-soft transition-colors hover:text-gold"
+                <button
+                  onClick={() => setLang('en')}
+                  className={`transition-colors hover:text-gold ${
+                    lang !== 'hi' ? 'text-gold-soft' : 'text-white/50'
+                  }`}
                 >
                   EN
                 </button>
                 <span className="text-white/30">/</span>
-                <button 
-                  onClick={() => {
-                    document.cookie = "googtrans=/en/hi; path=/";
-                    window.location.reload();
-                  }}
-                  className="transition-colors hover:text-gold"
+                <button
+                  onClick={() => setLang('hi')}
+                  className={`transition-colors hover:text-gold ${
+                    lang === 'hi' ? 'text-gold-soft' : 'text-white/50'
+                  }`}
                 >
                   HI
                 </button>

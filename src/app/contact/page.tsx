@@ -115,7 +115,12 @@ function Contact() {
         <div className="container-x grid gap-14 lg:grid-cols-[.85fr_1.15fr] lg:gap-20">
           {/* ---------------- left: contact information ---------------- */}
           <div>
-            <SectionHeading eyebrow="Direct Channels" size="sm" lines={["Speak to", "the desk."]} />
+            <SectionHeading
+              eyebrow="Direct Channels"
+              size="sm"
+              lines={["Speak to", "the desk."]}
+              hiLines={["डेस्क से", "बात करो।"]}
+            />
 
             <ul className="mt-10 space-y-4">
               {contact.phones.map((p) => (
@@ -123,6 +128,7 @@ function Contact() {
                   <a
                     href={`tel:${p.replace(/\s/g, "")}`}
                     className="group flex items-center gap-4 border border-navy/12 px-5 py-4 transition-all duration-400 hover:border-gold/60 hover:bg-paper"
+                    translate="no"
                   >
                     <Phone className="h-4 w-4 text-gold" strokeWidth={1.7} aria-hidden="true" />
                     <span className="font-display text-[1.05rem] tracking-[0.05em] text-navy">{p}</span>
@@ -133,12 +139,13 @@ function Contact() {
                 <a
                   href={`mailto:${contact.email}`}
                   className="group flex items-center gap-4 border border-navy/12 px-5 py-4 transition-all duration-400 hover:border-gold/60 hover:bg-paper"
+                  translate="no"
                 >
                   <Mail className="h-4 w-4 text-gold" strokeWidth={1.7} aria-hidden="true" />
                   <span className="break-all text-[0.92rem] tracking-[0.02em] text-navy/85">{contact.email}</span>
                 </a>
               </li>
-              <li className="flex items-center gap-4 border border-navy/12 px-5 py-4">
+              <li className="flex items-center gap-4 border border-navy/12 px-5 py-4" translate="no">
                 <Clock3 className="h-4 w-4 text-gold" strokeWidth={1.7} aria-hidden="true" />
                 <span className="text-[0.86rem] tracking-[0.03em] text-ink/70">{contact.hours}</span>
               </li>
@@ -153,8 +160,8 @@ function Contact() {
                       <p className="eyebrow text-navy/45">{o.kind}</p>
                       <MapPin className="h-4 w-4 text-gold" strokeWidth={1.7} aria-hidden="true" />
                     </div>
-                    <h3 className="mt-4 font-display text-[1.25rem] uppercase leading-none text-navy">{o.city}</h3>
-                    <p className="mt-1.5 text-[0.7rem] uppercase tracking-[0.18em] text-ink/45">{o.state}</p>
+                    <h3 className="mt-4 font-display text-[1.25rem] uppercase leading-none text-navy" translate="no">{o.city}</h3>
+                    <p className="mt-1.5 text-[0.7rem] uppercase tracking-[0.18em] text-ink/45" translate="no">{o.state}</p>
                     <p className="mt-4 text-[0.83rem] leading-relaxed text-ink/60">{o.note}</p>
                   </div>
                 </Reveal>
