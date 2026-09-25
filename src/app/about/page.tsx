@@ -140,7 +140,7 @@ export default function About() {
               </div>
               <ul className="mt-9 grid gap-2 sm:grid-cols-2">
                 {founder.credentials.map((c) => (
-                  <li key={c} className="flex items-center gap-3 border-t border-navy/12 py-3 text-[0.78rem] uppercase tracking-[0.1em] text-navy/78">
+                  <li key={c} translate="no" className="flex items-center gap-3 border-t border-navy/12 py-3 text-[0.78rem] uppercase tracking-[0.1em] text-navy/78">
                     <span className="h-1 w-1 rounded-full bg-gold" aria-hidden="true" />
                     {c}
                   </li>

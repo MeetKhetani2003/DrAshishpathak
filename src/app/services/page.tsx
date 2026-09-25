@@ -106,7 +106,12 @@ function ServicesIndex() {
 
       <section className="bg-paper py-20 lg:py-24">
         <div className="container-x">
-          <SectionHeading eyebrow="Audience Map" size="sm" lines={["Who the advisory", "is prepared for."]} />
+          <SectionHeading 
+            eyebrow="Audience Map" 
+            size="sm" 
+            lines={["Who the advisory", "is prepared for."]} 
+            hiLines={["सलाह किसके", "लिए तैयार है।"]} 
+          />
           <ul className="mt-12 grid gap-px bg-navy/12 sm:grid-cols-2 lg:grid-cols-5">
             {whoWeServe.map((w) => (
               <li key={w.id} className="group bg-paper p-7 transition-colors duration-500 hover:bg-white">
