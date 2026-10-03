@@ -2,7 +2,9 @@ import { NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 import dbConnect from '@/lib/mongodb';
 import Expert from '@/models/Expert';
+import Insight from '@/models/Insight';
 import { experts } from '@/data/experts';
+import { insights } from '@/data/insights';
 import fs from 'fs';
 import path from 'path';
 
@@ -56,6 +58,15 @@ export async function GET() {
       });
 
       await newExpert.save();
+    }
+
+    // Seed Insights
+    await Insight.deleteMany({});
+    for (const insight of insights) {
+      const newInsight = new Insight({
+        ...insight
+      });
+      await newInsight.save();
     }
 
     return NextResponse.json({ message: 'Seeded successfully' });

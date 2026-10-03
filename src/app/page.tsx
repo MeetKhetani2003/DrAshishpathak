@@ -434,7 +434,7 @@ function PracticeAreas() {
                   />
                   <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(7,21,47,.1),rgba(7,21,47,.82))]" aria-hidden="true" />
                 </div>
-                <h3 className="mt-7 font-display text-[1.28rem] uppercase leading-snug tracking-[0.03em] lg:text-[1.5rem]">{p.title}</h3>
+                <h3 className="mt-7 font-display text-[1.28rem] uppercase leading-snug tracking-[0.03em] lg:text-[1.5rem]">{formatMACT(p.title)}</h3>
                 <span className="mt-4 block h-px w-10 bg-gold/70 transition-all duration-500 group-hover:w-24" aria-hidden="true" />
                 <p className="mt-4 text-[0.875rem] leading-[1.8] text-white/55">{p.description}</p>
               </Link>
@@ -668,7 +668,7 @@ function ExpertBoardStrip() {
                               {e.practiceAreas.map((area: string) => (
                                 <li key={area} className="flex items-start gap-1.5">
                                   <span className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-navy/50" aria-hidden="true" />
-                                  {area}
+                                  {formatMACT(area)}
                                 </li>
                               ))}
                             </ul>
@@ -839,5 +839,26 @@ function Locations() {
         </div>
       </div>
     </section>
+  );
+}
+
+export function formatMACT(text: string) {
+  if (!text || typeof text !== 'string') return text;
+  if (!text.includes('MACT')) return text;
+  
+  const parts = text.split(/(\s*MACT\s*)/);
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (part.includes('MACT')) {
+          return (
+            <span key={i} className="notranslate" translate="no">
+              {part}
+            </span>
+          );
+        }
+        return <React.Fragment key={i}>{part}</React.Fragment>;
+      })}
+    </>
   );
 }

@@ -39,7 +39,6 @@ export default function About() {
           { label: "Founded Practice", value: "Greater Noida · Agra" },
           { label: "Advisory Head", value: "18+ Years" },
           { label: "Quality Framework", value: "ISO 9001:2015" },
-          { label: "Registration", value: "MSME Enterprise" },
         ]}
       />
 

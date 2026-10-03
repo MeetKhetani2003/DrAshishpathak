@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { ChevronDown, MapPin, Scale, GraduationCap } from "lucide-react";
 import PageHero from "@/components/PageHero";
+import { formatMACT } from "@/app/page";
 import {
   ArrowLink,
   Eyebrow,
@@ -51,7 +52,7 @@ export default function ExpertBoard() {
           { label: "Panel Strength", value: "Multiple Different Speciality Experts" },
           { label: "Combined Practice", value: "Clinical · Forensic · Legal" },
           { label: "Jurisdiction", value: "Pan-India Advisory" },
-          { label: "Engagement", value: "Confidential, Scope-defined" },
+          { label: "Consultation", value: "Confidential, Scope-defined" },
         ]}
       />
 
@@ -214,13 +215,12 @@ function Field({ label, items, icon: IconCmp, dark }: { label: string; items: st
         {items.map((q) => (
           <li
             key={q}
-            translate="no"
             className={cn(
               "border px-2.5 py-1.5 text-[0.68rem] uppercase tracking-[0.09em] transition-colors duration-300",
               dark ? "border-white/14 text-white/72 hover:border-gold/60 hover:text-gold-soft" : "border-navy/14 text-navy/72 hover:border-gold",
             )}
           >
-            {q}
+            {formatMACT(q)}
           </li>
         ))}
       </ul>

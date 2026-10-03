@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useParams } from "next/navigation";
 import Link from 'next/link';;
 import { AlertTriangle, ClipboardCheck, Compass, Users, ArrowRight } from "lucide-react";
@@ -46,7 +47,7 @@ function ServicesIndex() {
           { label: "Categories", value: "05" },
           { label: "Advisory Lanes", value: "14 Named Services" },
           { label: "Delivery", value: "Written Note · Report · Audit" },
-          { label: "Confidentiality", value: "Scope-bound Engagement" },
+          { label: "Confidentiality", value: "Scope-bound Advisory" },
         ]}
       />
 
@@ -90,7 +91,7 @@ function ServicesIndex() {
                     {c.services.map((s) => (
                       <li key={s.title} className="flex items-start gap-2.5 text-[0.85rem] leading-snug text-navy/80">
                         <span className="mt-[0.42rem] h-1 w-1 shrink-0 rounded-full bg-gold" aria-hidden="true" />
-                        {s.title}
+                        {formatMACT(s.title)}
                       </li>
                     ))}
                   </ul>
@@ -279,7 +280,7 @@ function ServiceDetail({ slug }: { slug: string }) {
                   <li key={s.title}>
                     <p className="flex items-baseline gap-3 font-display text-[1rem] uppercase leading-snug tracking-[0.03em]">
                       <span className="text-[0.66rem] text-gold">{String(i + 1).padStart(2, "0")}</span>
-                      {s.title}
+                      {formatMACT(s.title)}
                     </p>
                     <p className="mt-2 text-[0.85rem] leading-relaxed text-white/58">{s.description}</p>
                     {i < c.services.length - 1 ? <span className="mt-6 block h-px w-full bg-white/10" aria-hidden="true" /> : null}
@@ -325,4 +326,25 @@ function wrap(text: string, perLine: number) {
   const lines: string[] = [];
   for (let i = 0; i < words.length; i += perLine) lines.push(words.slice(i, i + perLine).join(" "));
   return lines;
+}
+
+export function formatMACT(text: string) {
+  if (!text || typeof text !== 'string') return text;
+  if (!text.includes('MACT')) return text;
+  
+  const parts = text.split(/(\s*MACT\s*)/);
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (part.includes('MACT')) {
+          return (
+            <span key={i} className="notranslate" translate="no">
+              {part}
+            </span>
+          );
+        }
+        return <React.Fragment key={i}>{part}</React.Fragment>;
+      })}
+    </>
+  );
 }

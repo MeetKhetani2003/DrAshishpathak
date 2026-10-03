@@ -48,11 +48,6 @@ export const nav = [
 
 export const trustBar = [
   {
-    title: "MSME Registered Enterprise",
-    meta: "Registered small enterprise",
-    icon: "badge",
-  },
-  {
     title: "ISO 9001:2015 Quality Certified",
     meta: "Documented quality process",
     icon: "check-shield",
