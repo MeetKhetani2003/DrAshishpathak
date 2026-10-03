@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from "lucide-react";
 import PageHero from "@/components/PageHero";
@@ -7,8 +7,8 @@ import { ArrowLink, Eyebrow, GoldRule, ImgReveal, Reveal, SectionHeading } from 
 import { cn } from "@/utils/cn";
 import useSeo from "@/hooks/useSeo";
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const [a, setA] = useState<any>(null);
   const [related, setRelated] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -65,7 +65,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
               <h1 className="sr-only">{a.title}</h1>
               <GoldRule className="mt-6" />
               <div className="mt-10 space-y-7">
-                {a.body.map((p, i) => (
+                {a.body.map((p: string, i: number) => (
                   <Reveal key={i} delay={i * 60}>
                     <p className={cn("text-[1.02rem] leading-[1.95] text-ink/78", i === 0 && "text-[1.12rem] leading-[1.8] text-navy")}>
                       {p}
@@ -77,7 +77,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
               <div className="mt-14 border-t border-navy/12 pt-10">
                 <Eyebrow tone="navy">Working Takeaways</Eyebrow>
                 <ul className="mt-6 grid gap-px bg-navy/12 sm:grid-cols-2">
-                  {a.takeaways.map((t, i) => (
+                  {a.takeaways.map((t: string, i: number) => (
                     <li key={t} className="flex items-start gap-4 bg-white p-6">
                       <span className="font-display text-[0.7rem] tracking-[0.14em] text-gold">{String(i + 1).padStart(2, "0")}</span>
                       <span className="text-[0.9rem] leading-relaxed text-navy/82">{t}</span>
@@ -98,7 +98,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
               <div className="mt-8 border-t border-navy/12 pt-6">
                 <p className="eyebrow text-ink/45">In this note</p>
                 <ol className="mt-4 space-y-3">
-                  {a.takeaways.map((t, i) => (
+                  {a.takeaways.map((t: string, i: number) => (
                     <li key={t} className="flex gap-3 text-[0.84rem] leading-snug text-ink/70">
                       <span className="font-display text-[0.68rem] text-gold">{String(i + 1).padStart(2, "0")}</span>
                       {t}
